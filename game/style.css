@@ -1,0 +1,50 @@
+/* Ember Sky Post — warm dusk UI: glass panels, ember accents, and a readable flight HUD. */
+:root {
+  --ember: #ffb35c;
+  --ember-hot: #ff7a45;
+  --ink: #fff7ea;
+  --ink-dim: #ffd9ae;
+  --glass: rgba(24, 16, 32, 0.72);
+  --glass-line: rgba(255, 179, 92, 0.45);
+  --font: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; background: #17101f; font-family: var(--font); color: var(--ink); overflow: hidden; }
+#stage { position: relative; width: 100vw; height: 100vh; }
+#sky-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+#vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, transparent 58%, rgba(10, 4, 18, 0.5) 100%); }
+.hidden { display: none !important; }
+
+#hud { position: absolute; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: flex-start; padding: 14px 20px; pointer-events: none; z-index: 5; }
+.hud-cluster { display: flex; gap: 10px; align-items: center; }
+#hud-center { flex-direction: column; gap: 2px; text-align: center; }
+.hud-item { background: var(--glass); border: 1px solid var(--glass-line); border-radius: 12px; padding: 7px 12px; font-size: 20px; font-weight: 700; letter-spacing: 0.04em; backdrop-filter: blur(6px); }
+.hud-item small { font-size: 11px; color: var(--ink-dim); margin-left: 3px; }
+.hud-label { display: block; font-size: 9px; letter-spacing: 0.28em; color: var(--ember); font-weight: 800; }
+#hud-objective { background: var(--glass); border: 1px solid var(--glass-line); border-radius: 999px; padding: 7px 16px; font-size: 14px; }
+#hud-timer { font-size: 22px; font-weight: 800; color: var(--ember); text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
+#combo-toast { position: absolute; top: 22%; left: 50%; transform: translateX(-50%); z-index: 6; background: linear-gradient(90deg, var(--ember-hot), var(--ember)); color: #2a1408; font-weight: 900; letter-spacing: 0.06em; padding: 10px 22px; border-radius: 999px; font-size: 19px; box-shadow: 0 10px 34px rgba(255, 122, 69, 0.45); pointer-events: none; }
+
+.panel-screen { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 8; background: linear-gradient(180deg, rgba(16, 8, 24, 0.18), rgba(16, 8, 24, 0.55)); }
+.panel { width: min(620px, 92vw); max-height: 92vh; overflow: auto; background: var(--glass); border: 1px solid var(--glass-line); border-radius: 24px; padding: 34px 38px; backdrop-filter: blur(14px); box-shadow: 0 30px 80px rgba(0,0,0,0.55); text-align: center; }
+.panel.small { width: min(380px, 92vw); }
+.eyebrow { font-size: 11px; letter-spacing: 0.34em; color: var(--ember); font-weight: 800; }
+.panel h1 { font-size: 58px; line-height: 1.02; margin: 12px 0 8px; font-weight: 900; letter-spacing: -0.01em; }
+.panel h1 span { color: var(--ember); font-style: italic; }
+.panel h2 { font-size: 32px; margin: 8px 0 14px; }
+.tagline { font-size: 18px; color: var(--ink-dim); }
+.story { margin: 14px 0; line-height: 1.55; font-size: 15px; }
+.controls-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 18px 0; font-size: 13px; color: var(--ink-dim); }
+kbd { background: #fff7ea; color: #241331; border-radius: 6px; padding: 2px 7px; font-family: var(--font); font-weight: 800; box-shadow: 0 2px 0 #c9a06a; margin-right: 3px; }
+.btn-primary { background: linear-gradient(90deg, var(--ember-hot), var(--ember)); border: none; color: #2a1408; font-size: 17px; font-weight: 900; padding: 14px 26px; border-radius: 999px; cursor: pointer; width: 100%; margin-top: 8px; box-shadow: 0 12px 30px rgba(255, 122, 69, 0.4); }
+.btn-primary:hover { transform: translateY(-1px); filter: brightness(1.06); }
+.btn-ghost { background: transparent; border: 1px solid var(--glass-line); color: var(--ink); padding: 11px 20px; border-radius: 999px; cursor: pointer; width: 100%; margin-top: 10px; font-weight: 700; }
+.best-line { margin-top: 14px; font-size: 13px; color: var(--ink-dim); font-style: italic; }
+.brief-list { text-align: left; margin: 10px auto 14px; max-width: 470px; line-height: 1.6; font-size: 15px; padding-left: 22px; }
+.brief-note { font-style: italic; color: var(--ink-dim); background: rgba(255,179,92,0.1); border-left: 3px solid var(--ember); padding: 10px 14px; text-align: left; border-radius: 0 12px 12px 0; margin-bottom: 16px; font-size: 14px; }
+#result-stars { font-size: 40px; color: var(--ember); letter-spacing: 0.2em; text-shadow: 0 4px 22px rgba(255,179,92,0.6); }
+#result-verdict { color: var(--ink-dim); line-height: 1.55; margin: 8px 0 14px; }
+#result-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+#result-stats div { background: rgba(255,247,234,0.07); border: 1px solid rgba(255,179,92,0.25); border-radius: 12px; padding: 9px; }
+#result-stats dt { font-size: 10px; letter-spacing: 0.22em; color: var(--ember); }
+#result-stats dd { font-size: 20px; font-weight: 800; }
